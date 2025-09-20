@@ -1,0 +1,162 @@
+/* --- 全局变量定义 --- */
+:root {
+    --bg-color: #121212; /* 更柔和的黑色背景 */
+    --card-bg-color: #1e1e1e; /* 卡片背景色 */
+    --text-color: #e0e0e0; /* 主要文本颜色 */
+    --text-muted-color: #888; /* 辅助文本颜色 */
+    --accent-color: #00aaff; /* 主题强调色，如蓝色 */
+    --glow-color: rgba(0, 170, 255, 0.5); /* 悬浮时的光晕效果 */
+    --border-radius: 12px;
+    --font-main: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* --- 基础与重置样式 --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* --- 头部区域样式 --- */
+.hero-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #ffffff, var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-header p {
+    font-size: 1.1rem;
+    color: var(--text-muted-color);
+    font-weight: 300;
+}
+
+/* --- 卡片容器样式 --- */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- 卡片样式 --- */
+.card {
+    background: var(--card-bg-color);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* 入场动画 */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* --- 卡片动画延迟效果 --- */
+.card:nth-child(1) { animation-delay: 0.2s; }
+.card:nth-child(2) { animation-delay: 0.4s; }
+.card:nth-child(3) { animation-delay: 0.6s; }
+.card:nth-child(4) { animation-delay: 0.8s; }
+
+
+/* --- 卡片悬浮效果 --- */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 20px var(--glow-color);
+    border-color: var(--accent-color);
+}
+
+.card .card-icon {
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+.card:hover .card-icon {
+    color: #fff;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #fff;
+}
+
+.card p {
+    color: var(--text-muted-color);
+    font-size: 0.95rem;
+}
+
+/* --- 页脚样式 --- */
+footer {
+    text-align: center;
+    margin-top: auto; /* 将页脚推到底部 */
+    padding-top: 4rem;
+    color: var(--text-muted-color);
+    font-size: 0.9rem;
+    animation: fadeIn 2s ease-out;
+}
+
+/* --- 动画关键帧 --- */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* --- 响应式设计 --- */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    .hero-header h1 {
+        font-size: 2rem;
+    }
+    .card-container {
+        gap: 1.5rem;
+    }
+}
