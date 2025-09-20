@@ -58,10 +58,12 @@ body {
 /* --- 卡片容器样式 --- */
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* 在大屏幕上强制为两列 */
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     width: 100%;
-    max-width: 1200px;
+    /* 可以适当减小最大宽度，让布局更紧凑 */
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -157,6 +159,8 @@ footer {
         font-size: 2rem;
     }
     .card-container {
+        /* 在手机上强制变为单列布局 */
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 }
