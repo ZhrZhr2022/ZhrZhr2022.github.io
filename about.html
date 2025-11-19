@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | ZHR</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <div class="logo">ZHR.Dev</div>
+        <ul class="nav-links">
+            <li><a href="index.html">主页</a></li>
+            <li><a href="about.html" class="active">关于我</a></li>
+        </ul>
+    </nav>
+
+    <main class="about-container">
+        <section class="code-editor-card">
+            <div class="editor-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="filename">profile.js</span>
+            </div>
+            <div class="editor-content">
+<pre><code class="language-javascript"><span class="keyword">const</span> <span class="variable">developer</span> = {
+    <span class="key">name</span>: <span class="string">"ZHR"</span>,
+    <span class="key">role</span>: <span class="string">"Postgrad Candidate"</span>,
+    <span class="key">focus</span>: <span class="string">"CS 408 & Algorithms"</span>,
+    <span class="key">github</span>: <span class="string">"ZhrZhr2022"</span>,
+    <span class="key">motto</span>: <span class="string">"Talk is cheap, show me the code."</span>,
+    <span class="key">hobbies</span>: [
+        <span class="string">"Coding"</span>, 
+        <span class="string">"Reading"</span>, 
+        <span class="string">"Coffee"</span>
+    ]
+};
+
+<span class="comment">// Loading success...</span>
+<span class="function">console.log</span>(<span class="string">"Ready to fight!"</span>);
+</code></pre>
+            </div>
+        </section>
+
+        <section class="bio-section">
+            <h1>Hello, World! <span class="wave">👋</span></h1>
+            <p>
+                我是一名专注于计算机考研的学生。在这个页面，我整理了 408 四门专业课的核心知识点，
+                旨在构建一个清晰、高效的知识体系。
+            </p>
+            <p>
+                我的目标不仅仅是考试，更是为了深入理解计算机的底层逻辑。
+                如果你也对技术充满热情，欢迎通过以下方式联系我。
+            </p>
+            
+            <div class="tech-stack">
+                <span class="tech-tag"><i class="fa-brands fa-java"></i> Java</span>
+                <span class="tech-tag"><i class="fa-brands fa-python"></i> Python</span>
+                <span class="tech-tag"><i class="fa-solid fa-database"></i> MySQL</span>
+                <span class="tech-tag"><i class="fa-brands fa-linux"></i> Linux</span>
+                <span class="tech-tag"><i class="fa-brands fa-git-alt"></i> Git</span>
+            </div>
+            
+            <div class="social-buttons">
+                <a href="https://github.com/ZhrZhr2022" target="_blank" class="btn-social github">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <button id="emailBtn" class="btn-social email">
+                    <i class="fa-solid fa-envelope"></i> Email
+                </button>
+                <a href="https://space.bilibili.com/" target="_blank" class="btn-social bili">
+                    <i class="fa-brands fa-bilibili"></i> Bilibili
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div id="emailModal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-icon">
+                <i class="fa-solid fa-paper-plane"></i>
+            </div>
+            <h3>Contact Me</h3>
+            <p>随时欢迎与我交流技术或考研心得！</p>
+            
+            <div class="email-display-box">
+                <span id="myEmail">1419267632@qq.com</span>
+                <button id="copyBtn" class="copy-icon-btn" title="复制邮箱">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+            <span id="copyMsg" class="copy-feedback">已复制到剪贴板!</span>
+
+            <a href="mailto:1419267632@qq.com" class="modal-action-btn">
+                打开邮件客户端
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 [ZHR]. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 获取元素
+        const emailBtn = document.getElementById('emailBtn');
+        const modal = document.getElementById('emailModal');
+        const closeModal = document.getElementById('closeModal');
+        const copyBtn = document.getElementById('copyBtn');
+        const emailText = document.getElementById('myEmail').innerText;
+        const copyMsg = document.getElementById('copyMsg');
+
+        // 打开弹窗
+        emailBtn.addEventListener('click', () => {
+            modal.classList.add('show');
+        });
+
+        // 关闭弹窗 (点击X或点击背景)
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('show');
+            copyMsg.classList.remove('show'); // 重置提示信息
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                copyMsg.classList.remove('show');
+            }
+        });
+
+        // 复制功能
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(emailText).then(() => {
+                // 显示复制成功提示
+                copyMsg.classList.add('show');
+                
+                // 2秒后自动隐藏提示
+                setTimeout(() => {
+                    copyMsg.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+        });
+    </script>
+</body>
+</html>

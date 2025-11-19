@@ -1,28 +1,30 @@
 /* --- 全局变量定义 --- */
 :root {
-    --bg-color: #121212; /* 更柔和的黑色背景 */
-    --card-bg-color: #1e1e1e; /* 卡片背景色 */
-    --text-color: #e0e0e0; /* 主要文本颜色 */
-    --text-muted-color: #888; /* 辅助文本颜色 */
-    --accent-color: #00aaff; /* 主题强调色，如蓝色 */
-    --glow-color: rgba(0, 170, 255, 0.5); /* 悬浮时的光晕效果  */
-    --border-radius: 12px;
-    --font-main: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --bg-color: #0f0f13;
+    --text-color: #ffffff;
+    --text-muted: #a0a0a0;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --primary-glow: #00aaff;
+    --font-main: 'Noto Sans SC', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+    --accent-red: #ff5f56;
+    --accent-yellow: #ffbd2e;
+    --accent-green: #27c93f;
 }
 
-/* --- 基础与重置样式 --- */
+/* --- 基础重置 --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.15), transparent 25%), 
+        radial-gradient(circle at 85% 30%, rgba(0, 170, 255, 0.15), transparent 25%);
     color: var(--text-color);
     font-family: var(--font-main);
     line-height: 1.6;
@@ -30,137 +32,579 @@ body {
     flex-direction: column;
     min-height: 100vh;
     align-items: center;
-    padding: 2rem;
+    overflow-x: hidden;
 }
 
-/* --- 头部区域样式 --- */
+/* --- 导航栏 (Glassmorphism) --- */
+.glass-nav {
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 15, 19, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.glass-nav .logo {
+    font-family: var(--font-code);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #fff;
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-glow);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* --- 头部区域 --- */
 .hero-header {
     text-align: center;
-    margin-bottom: 4rem;
-    animation: fadeInDown 1s ease-out;
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+    animation: fadeInDown 0.8s ease-out;
+    width: 100%;
+    max-width: 800px;
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.3);
+    transition: transform 0.3s;
+}
+
+.avatar:hover {
+    transform: scale(1.05) rotate(5deg);
+}
+
+.status-badge {
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    background: #ff6b6b;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 2px solid var(--bg-color);
 }
 
 .hero-header h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    background: linear-gradient(90deg, #ffffff, var(--accent-color));
+    background: linear-gradient(135deg, #fff 0%, #b3b3b3 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.hero-header p {
-    font-size: 1.1rem;
-    color: var(--text-muted-color);
-    font-weight: 300;
+.typing-text {
+    font-family: var(--font-code);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
 }
 
-/* --- 卡片容器样式 --- */
-.card-container {
-    display: grid;
-    /* 在大屏幕上强制为两列 */
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    width: 100%;
-    /* 可以适当减小最大宽度，让布局更紧凑 */
-    max-width: 900px;
-    margin: 0 auto;
+/* --- 倒计时样式 --- */
+.countdown-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
-/* --- 卡片样式 --- */
-.card {
-    background: var(--card-bg-color);
-    border: 1px solid #2a2a2a;
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    text-align: center;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+.countdown-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--card-border);
+    padding: 10px 15px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-    /* 入场动画 */
+    min-width: 70px;
+    backdrop-filter: blur(5px);
+}
+
+.countdown-item span:first-child {
+    font-family: var(--font-code);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-glow);
+    text-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+.countdown-item .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* --- 卡片容器 --- */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 900px;
+    padding: 0 1rem;
+}
+
+.card {
+    position: relative;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.5s ease-out forwards;
+    animation: fadeInUp 0.6s ease-out forwards;
 }
 
-/* --- 卡片动画延迟效果 --- */
-.card:nth-child(1) { animation-delay: 0.2s; }
-.card:nth-child(2) { animation-delay: 0.4s; }
-.card:nth-child(3) { animation-delay: 0.6s; }
-.card:nth-child(4) { animation-delay: 0.8s; }
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
 
-
-/* --- 卡片悬浮效果 --- */
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 20px var(--glow-color);
-    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
-.card .card-icon {
-    margin-bottom: 1.5rem;
-    color: var(--accent-color);
-    transition: color 0.3s ease;
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, var(--accent), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: -1;
+}
+
+.card:hover::before { opacity: 0.15; }
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    display: inline-flex;
+    padding: 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    transition: all 0.3s;
 }
 
 .card:hover .card-icon {
-    color: #fff;
+    background: var(--accent);
+    color: #000;
+    transform: scale(1.1);
+}
+
+.card-bg-icon {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    font-size: 8rem;
+    opacity: 0.03;
+    transform: rotate(15deg);
+    transition: transform 0.5s;
+}
+
+.card:hover .card-bg-icon {
+    transform: rotate(0deg) scale(1.1);
+    opacity: 0.07;
 }
 
 .card h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
 .card p {
-    color: var(--text-muted-color);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.card-arrow {
+    align-self: flex-end;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s;
+    color: var(--accent);
+}
+
+.card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- 关于我页面样式 --- */
+.about-container {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 8rem;
+    padding: 0 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 左右布局 */
+    gap: 4rem;
+    align-items: center;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* 代码编辑器卡片 */
+.code-editor-card {
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+    overflow: hidden;
+    font-family: var(--font-code);
+}
+
+.editor-header {
+    background: #2d2d2d;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+.red { background: var(--accent-red); }
+.yellow { background: var(--accent-yellow); }
+.green { background: var(--accent-green); }
+.filename { margin-left: 10px; font-size: 0.8rem; color: #aaa; }
+
+.editor-content { padding: 20px; }
+.editor-content pre { margin: 0; white-space: pre-wrap; }
+.editor-content code { color: #d4d4d4; font-size: 0.9rem; line-height: 1.5; }
+
+/* 简单的语法高亮颜色模拟 */
+.keyword { color: #c678dd; }
+.variable { color: #e06c75; }
+.string { color: #98c379; }
+.key { color: #61afef; }
+.comment { color: #7f848e; font-style: italic; }
+.function { color: #e5c07b; }
+
+/* 个人简介文本区 */
+.bio-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+.wave { display: inline-block; animation: wave 2s infinite; transform-origin: 70% 70%; }
+@keyframes wave {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+    60% { transform: rotate(0deg); }
+}
+
+.bio-section p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+}
+
+/* 技能标签 */
+.tech-stack { margin: 2rem 0; display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.tech-tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--card-border);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* 社交按钮 */
+.social-buttons { display: flex; gap: 1rem; }
+.btn-social {
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.github { background: #333; color: #fff; }
+.email { background: #00aaff; color: #fff; }
+.bili { background: #fb7299; color: #fff; } /* B站粉 */
+.btn-social:hover { transform: translateY(-3px); filter: brightness(1.1); }
+
+/* --- 页脚样式更新 --- */
+footer {
+    margin-top: auto;
+    padding: 3rem 0 2rem;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.social-links {
+    margin-bottom: 1rem;
+    display: flex;             /* 新增：确保居中对齐 */
+    justify-content: center;   /* 新增：确保居中对齐 */
+    align-items: center;       /* 新增：确保垂直对齐 */
+}
+
+/* 同时作用于 a 标签和 button 标签 */
+.social-links a, 
+.social-links button {
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: color 0.3s, transform 0.3s;
+    
+    /* 针对 button 的重置样式 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1; /* 防止按钮高度塌陷 */
+}
+
+.social-links a:hover, 
+.social-links button:hover {
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+footer p {
+    font-size: 0.8rem;
+    color: #555;
+    font-family: var(--font-code);
+}
+/* --- 动画 --- */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 响应式 --- */
+@media (max-width: 768px) {
+    .hero-header h1 { font-size: 1.8rem; }
+    .card-container { grid-template-columns: 1fr; }
+    .about-container { grid-template-columns: 1fr; margin-top: 6rem; }
+    .code-editor-card { margin-bottom: 2rem; }
+    .countdown-wrapper { gap: 0.5rem; }
+    .countdown-item { min-width: 60px; padding: 8px; }
+}
+/* --- 邮箱弹窗 (Modal) 样式 --- */
+
+/* 遮罩层：默认隐藏 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px); /* 背景模糊 */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none; /* 隐藏时不可点击 */
+    transition: opacity 0.3s ease;
+}
+
+/* 显示状态 */
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* 卡片主体 */
+.modal-card {
+    background: rgba(30, 30, 35, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-card {
+    transform: translateY(0);
+}
+
+/* 关闭按钮 */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+/* 顶部大图标 */
+.modal-icon {
+    font-size: 3rem;
+    color: var(--primary-glow);
+    margin-bottom: 1rem;
+}
+
+.modal-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.modal-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 邮箱显示框 */
+.email-display-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#myEmail {
+    font-family: var(--font-code);
+    color: #fff;
     font-size: 0.95rem;
 }
 
-/* --- 页脚样式 --- */
-footer {
-    text-align: center;
-    margin-top: auto; /* 将页脚推到底部 */
-    padding-top: 4rem;
-    color: var(--text-muted-color);
-    font-size: 0.9rem;
-    animation: fadeIn 2s ease-out;
+/* 复制按钮 */
+.copy-icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 5px;
+    transition: color 0.3s;
 }
 
-/* --- 动画关键帧 --- */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+.copy-icon-btn:hover {
+    color: var(--primary-glow);
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* 复制反馈消息 */
+.copy-feedback {
+    display: block;
+    font-size: 0.8rem;
+    color: #2ecc71; /* 绿色 */
+    height: 20px;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.copy-feedback.show {
+    opacity: 1;
 }
 
+/* 底部主按钮 */
+.modal-action-btn {
+    display: inline-block;
+    background: var(--primary-glow);
+    color: #000;
+    padding: 10px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
 
-/* --- 响应式设计 --- */
-@media (max-width: 768px) {
-    body {
-        padding: 1rem;
-    }
-    .hero-header h1 {
-        font-size: 2rem;
-    }
-    .card-container {
-        /* 在手机上强制变为单列布局 */
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
+.modal-action-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.4);
+}
+
+/* 覆盖 social-buttons 中的 button 样式以匹配 */
+.social-buttons button {
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    border: none; /* 移除默认边框 */
 }

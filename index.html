@@ -3,64 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的408考研知识笔记</title>
+    <title>ZHR's Space | 408 知识库</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <nav class="glass-nav">
+        <div class="logo">ZHR.Dev</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">主页</a></li>
+            <li><a href="about.html">关于我</a></li>
+        </ul>
+    </nav>
+
     <header class="hero-header">
-        <h1>计算机408核心知识笔记</h1>
-        <p>在这里，沉淀知识，静待花开。</p>
+        <div class="profile-container">
+            <img src="https://api.dicebear.com/9.x/notionists/svg?seed=ZHR" alt="Profile" class="avatar">
+            <div class="status-badge">冲刺中 🔥</div>
+        </div>
+        <h1>计算机 408 核心笔记</h1>
+        <p class="typing-text">距离考研 (12月20日) 还有：</p>
+
+        <div class="countdown-wrapper">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <span class="label">天</span>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <span class="label">时</span>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <span class="label">分</span>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <span class="label">秒</span>
+            </div>
+        </div>
     </header>
 
     <main class="card-container">
-        <!-- 卡片 1: 数据结构 -->
-        <a href="数据结构.html" class="card">
-            <div class="card-icon">
-                <!-- SVG Icon for Data Structures -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V5h5v2h2V5a2 2 0 0 0-2-2zm4 0v2h2a2 2 0 0 1 2 2v2h-2V7h-2V5h2z"/><path d="M14 12v4h-2v-4h2zm-2-6V4h2v2h-2z"/><path d="M3 12h2v4H3v-4z"/><path d="M21 12h-2v4h2v-4z"/></svg>
+        <a href="数据结构.html" class="card" style="--accent: #ff6b6b;">
+            <div class="card-bg-icon"><i class="fa-solid fa-code-branch"></i></div>
+            <div class="card-content">
+                <div class="card-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h2>数据结构</h2>
+                <p>算法的基石。包含线性表、树、图、排序与查找的核心逻辑。</p>
             </div>
-            <h2>数据结构</h2>
-            <p>算法的基石，程序的灵魂。包含线性表、树、图等核心概念。</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <!-- 卡片 2: 计算机组成原理 -->
-        <a href="计算机组成原理.html" class="card">
-            <div class="card-icon">
-                <!-- SVG Icon for Computer Organization -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect><line x1="9" y1="2" x2="9" y2="22"></line><line x1="15" y1="2" x2="15" y2="22"></line><line x1="2" y1="9" x2="22" y2="9"></line><line x1="2" y1="15" x2="22" y2="15"></line></svg>
+        <a href="计算机组成原理.html" class="card" style="--accent: #4ecdc4;">
+            <div class="card-bg-icon"><i class="fa-solid fa-microchip"></i></div>
+            <div class="card-content">
+                <div class="card-icon"><i class="fa-solid fa-memory"></i></div>
+                <h2>组成原理</h2>
+                <p>深入硬件底层。理解指令系统、CPU、存储器与总线的奥秘。</p>
             </div>
-            <h2>计算机组成原理</h2>
-            <p>深入硬件底层，理解计算机的运算、存储和指令执行的奥秘。</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <!-- 卡片 3: 操作系统 -->
-        <a href="操作系统.html" class="card">
-            <div class="card-icon">
-                <!-- SVG Icon for Operating Systems -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.252a10 10 0 1 1-7.07 17.071A10 10 0 0 1 12 2.252zM12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+        <a href="操作系统.html" class="card" style="--accent: #ffe66d;">
+            <div class="card-bg-icon"><i class="fa-solid fa-desktop"></i></div>
+            <div class="card-content">
+                <div class="card-icon"><i class="fa-solid fa-terminal"></i></div>
+                <h2>操作系统</h2>
+                <p>软硬件的桥梁。进程管理、内存调度、文件系统与I/O控制。</p>
             </div>
-            <h2>操作系统</h2>
-            <p>软硬件之间的桥梁，管理进程、内存、文件和设备的核心系统。</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <!-- 卡片 4: 计算机网络 -->
-        <a href="计算机网络.html" class="card">
-            <div class="card-icon">
-                <!-- SVG Icon for Computer Networks -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        <a href="计算机网络.html" class="card" style="--accent: #1a535c;">
+            <div class="card-bg-icon"><i class="fa-solid fa-globe"></i></div>
+            <div class="card-content">
+                <div class="card-icon"><i class="fa-solid fa-network-wired"></i></div>
+                <h2>计算机网络</h2>
+                <p>数字世界的脉络。从物理层到应用层，探索数据传输的协议。</p>
             </div>
-            <h2>计算机网络</h2>
-            <p>探索数据在数字世界中传输的规则，从物理层到应用层的全景。</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
     </main>
 
     <footer>
-        <p>&copy; 2025 [ZHR]. All Rights Reserved.</p>
+        <div class="social-links">
+            <a href="https://github.com/ZhrZhr2022" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            
+            <button id="emailBtn" title="Email Me">
+                <i class="fa-solid fa-envelope"></i>
+            </button>
+
+            <a href="https://space.bilibili.com/" target="_blank" title="Bilibili"><i class="fa-brands fa-bilibili"></i></a>
+        </div>
+        <p>&copy; 2025 [ZHR]. All Rights Reserved. | Keep Coding.</p>
     </footer>
 
+    <div id="emailModal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-icon">
+                <i class="fa-solid fa-paper-plane"></i>
+            </div>
+            <h3>Contact Me</h3>
+            <p>随时欢迎与我交流技术或考研心得！</p>
+            
+            <div class="email-display-box">
+                <span id="myEmail">1419267632@qq.com</span>
+                <button id="copyBtn" class="copy-icon-btn" title="复制邮箱">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+            <span id="copyMsg" class="copy-feedback">已复制到剪贴板!</span>
+
+            <a href="mailto:1419267632@qq.com" class="modal-action-btn">
+                打开邮件客户端
+            </a>
+        </div>
+    </div>
+
+    <script>
+        /* --- 1. 考研倒计时逻辑 --- */
+        function updateCountdown() {
+            const currentYear = new Date().getFullYear();
+            // 设定目标日期为当年的 12月20日
+            let targetDate = new Date(`December 20, ${currentYear} 00:00:00`).getTime();
+            const now = new Date().getTime();
+
+            // 如果今天已经过了今年的12月20日，则目标设为明年
+            if (now > targetDate) {
+                targetDate = new Date(`December 20, ${currentYear + 1} 00:00:00`).getTime();
+            }
+
+            const gap = targetDate - now;
+
+            const days = Math.floor(gap / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((gap % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); 
+
+        /* --- 2. 邮箱弹窗逻辑 --- */
+        const emailBtn = document.getElementById('emailBtn');
+        const modal = document.getElementById('emailModal');
+        const closeModal = document.getElementById('closeModal');
+        const copyBtn = document.getElementById('copyBtn');
+        const emailText = document.getElementById('myEmail').innerText;
+        const copyMsg = document.getElementById('copyMsg');
+
+        // 打开弹窗
+        emailBtn.addEventListener('click', () => {
+            modal.classList.add('show');
+        });
+
+        // 关闭弹窗
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('show');
+            copyMsg.classList.remove('show');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                copyMsg.classList.remove('show');
+            }
+        });
+
+        // 复制功能
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(emailText).then(() => {
+                copyMsg.classList.add('show');
+                setTimeout(() => {
+                    copyMsg.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+        });
+    </script>
 </body>
 </html>
